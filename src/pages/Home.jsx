@@ -4,6 +4,7 @@ import Categories from '../components/Category'
 import Card from '../components/Card'
 import { food_items } from '../server_manager/food'
 import { dataContext } from '../context/UserContext'
+import { GiCancel } from "react-icons/gi";
 
 function Home() {
   let {category, setCategory, input} = useContext(dataContext)
@@ -59,11 +60,12 @@ function Home() {
         }
       </div>
 
-      {/* <div className='w-[40vw] h-[100%] fixed top-0 right-0 bg-white shadow-xl'>
-        <header>
-
+      <div className='p-5 w-[40vw] h-[100%] fixed top-0 right-0 bg-white shadow-xl'>
+        <header className='w-[100%] flex justify-between items-center'>
+          <span className='text-green-400 text-[18px] font-semibold'>Order Items</span>
+          <GiCancel className='w-[20px] h-[20px] text-green-400 text-[18px] font-semibold cursor-pointer hover:text-green-700' />
         </header>
-      </div> */}
+      </div>
     </div>
   )
 }
