@@ -32,19 +32,25 @@ function Home() {
   return (
     <div className='bg-slate-200 w-full min-h-screen'>
       <Nav />
-      <div className='flex flex-wrap justify-center items-center gap-5 w-[100%]'>
-        {
-          Categories.map((category, idx) => {
-            return (
-              <div className='w-[130px] h-[130px] bg-white flex flex-col items-center justify-center gap-3 p-4 text-[16px] font-semibold text-gray-600 rounded-lg shadow-xl hover:bg-green-200 cursor-pointer transition-all duration-300'
-              onClick={() => categoryFoodFilter(category.name)}>
-                {category.icon}
-                {category.name}
-              </div>
-            )
-          })
-        }
-      </div>
+
+      {/* Category */}
+      {!input && 
+        <div className='flex flex-wrap justify-center items-center gap-5 w-[100%]'>
+          {
+            Categories.map((category, idx) => {
+              return (
+                <div className='w-[130px] h-[130px] bg-white flex flex-col items-center justify-center gap-3 p-4 text-[16px] font-semibold text-gray-600 rounded-lg shadow-xl hover:bg-green-200 cursor-pointer transition-all duration-300'
+                onClick={() => categoryFoodFilter(category.name)}>
+                  {category.icon}
+                  {category.name}
+                </div>
+              )
+            })
+          }
+        </div>
+      }
+
+      {/* Cards of food */}
       <div className='w-full flex flex-wrap justify-center items-center gap-5 px-5 pt-8 pb-8'>
         {
           category.map((item) => (
@@ -52,6 +58,12 @@ function Home() {
           ))
         }
       </div>
+
+      {/* <div className='w-[40vw] h-[100%] fixed top-0 right-0 bg-white shadow-xl'>
+        <header>
+
+        </header>
+      </div> */}
     </div>
   )
 }
