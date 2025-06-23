@@ -61,10 +61,14 @@ function Home() {
 
       {/* Cards of food */}
       <div className='w-full flex flex-wrap justify-center items-center gap-5 px-5 pt-8 pb-8'>
-        {
-          category.map((item, idx) => (
-              <Card key={`card-food-${idx}`} name={item.food_name} image={item.food_image} price={item.price} id={item.id} type={item.food_type} />
-          ))
+        { category.length > 0 ? 
+            category.map((item, idx) => (
+                <Card key={`card-food-${idx}`} name={item.food_name} image={item.food_image} price={item.price} id={item.id} type={item.food_type} />
+            ))
+          : 
+            <div className='mt-5'>
+              <span className='text-4xl fw-semibold text-green-400'>No search found...</span>
+            </div>
         }
       </div>
 
