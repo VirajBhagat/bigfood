@@ -8,7 +8,7 @@ import { dataContext } from '../context/UserContext';
 import { food_items } from '../server_manager/food';
 
 function Nav() {
-  let {input, setInput, category, setCategory} = useContext(dataContext);
+  let {input, setInput, category, setCategory, showCart, setShowCart} = useContext(dataContext);
   
   useEffect(()=> {
     let newFoodList = food_items.filter((item) => (item.food_name.toLowerCase().includes(input) || item.food_name.includes(input)))
@@ -29,7 +29,9 @@ function Nav() {
             onChange={(e) => setInput(e.target.value)} value={input}/>
         </form>
 
-        <div className='w-[60px] h-[60px] bg-white flex justify-center items-center rounded-md shadow-xl relative'>
+        <div className='w-[60px] h-[60px] bg-white cursor-pointer flex justify-center items-center rounded-md shadow-xl relative' onClick={() => {
+          setShowCart(true)
+        }}>
             <span className='absolute top-1.5 right-4'>0</span>
             <HiOutlineShoppingBag className='w-[20px] h-[20px] text-green-500' />
         </div>
