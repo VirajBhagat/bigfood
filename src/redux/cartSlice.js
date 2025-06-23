@@ -20,10 +20,13 @@ const cartslice = createSlice({
         },
         DecreaseQty: (state, action) => {
             return state.map((item) => (item.id === action.payload? {...item, qty: item.qty-1} : {...item}))
+        },
+        RemoveAllOrder: (state, action) => {
+            return [];
         }
     }
 })
 
-export const {AddItem, RemoveItem, IncreaseQty, DecreaseQty} = cartslice.actions;
+export const {AddItem, RemoveItem, IncreaseQty, DecreaseQty, RemoveAllOrder} = cartslice.actions;
 
 export default cartslice.reducer;

@@ -8,8 +8,12 @@ import { GiCancel } from "react-icons/gi";
 import CartCard from '../components/CartCard';
 import { useSelector } from 'react-redux';
 import emptyCartImg from '../assets/img/empty_cart.webp';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { RemoveAllOrder } from '../redux/cartSlice';
 
 function Home() {
+  let dispatch = useDispatch();
   let items = useSelector(state => state.cart);
 
   let {category, setCategory, input, showCart, setShowCart} = useContext(dataContext)
@@ -114,7 +118,7 @@ function Home() {
           </div>
 
           {/* Place my order */}
-          <button className='cursor-pointer w-[50%] p-3 bg-green-400 text-white hover:bg-green-500 transition rounded-lg cursor-pointer font-bold'>Place order</button>
+          <button className='cursor-pointer w-[50%] p-3 bg-green-400 text-white hover:bg-green-500 transition rounded-lg cursor-pointer font-bold' onClick={() => {dispatch(RemoveAllOrder()); toast.success("Order place successfully.")}}>Place order</button>
         </> 
           :
           <>
