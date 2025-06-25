@@ -10,19 +10,26 @@ function Card({ name, image, id, price, type }) {
   let dispatch = useDispatch();
 
   return (
-    <div className="w-[300px] h-[350px] bg-white p-4 rounded-lg flex flex-col hover:border-2 border-green-300">
-      <div className="w-full h-[60%] overflow-hidden rounded-lg shadow-lg">
-        <img src={image} alt="" className="object-cover aspect-3/2 h-full" />
+    <div className="w-[300px] bg-white p-4 rounded-lg flex flex-col gap-3 hover:border-2 border-green-300">
+      {/* Image Section */}
+      <div className="w-full aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
+        <img src={image} alt="" className="w-full h-full object-cover" />
       </div>
-      <div className="h-[40%] flex flex-col justify-end">
-        <div className="text-2xl font-semibold">{name}</div>
-        <div className="w-full flex justify-between items-center">
-          <div className="text-lg font-bold text-green-500">Rs {price} /-</div>
-          <div className="flex justify-center items-center gap-2 text-lg font-semibold text-green-500">
+
+      {/* Content Section */}
+      <div className="flex flex-col gap-2 flex-grow">
+        <div className="text-xl font-semibold">{name}</div>
+
+        <div className="w-full flex justify-between items-center flex-wrap gap-2">
+          <div className="text-base sm:text-lg font-bold text-green-500">
+            Rs {price} /-
+          </div>
+          <div className="flex justify-center items-center gap-2 text-sm sm:text-lg font-semibold text-green-500">
             {type === "veg" ? <LuLeafyGreen /> : <GiChickenOven />}
             <span>{type === "veg" ? "Veg" : "Non Veg"}</span>
           </div>
         </div>
+        
         <button
           className="w-full p-3 bg-green-400 text-white hover:bg-green-300 transition rounded-lg cursor-pointer font-bold"
           onClick={() => {
