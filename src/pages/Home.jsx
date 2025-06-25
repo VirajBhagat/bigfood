@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import Nav from "../components/Nav";
-import Categories from "../components/Category";
 import Card from "../components/Card";
 import { food_items } from "../server_manager/food";
 import { dataContext } from "../context/UserContext";
@@ -16,11 +15,13 @@ function Home() {
   let dispatch = useDispatch();
   let items = useSelector((state) => state.cart);
 
-  let { category, setCategory, input, showCart, setShowCart } =
-    useContext(dataContext);
+  let { category, setCategory, foodCategories, setFoodCategories, input, showCart, setShowCart } = useContext(dataContext);
   const [search, setSearch] = useState(food_items);
 
-  const categoryFoodFilter = (categoryType) => {
+  const categoryFoodFilter = (categoryType, categoryId) => {
+    // To set activeness for our filter food category
+    setFoodCategories(foodCategories.map((category) => (category.id == categoryId ? {...category, active:true} : {...category, active: false} )));
+    
     if (categoryType === "All") {
       setCategory(food_items);
     } else {
@@ -61,12 +62,12 @@ function Home() {
         <div className='w-full'>
           {/* Desktop view */}
           <div className='hidden md:flex flex-wrap justify-center items-center gap-5 mt-5'>
-            {Categories.map((category, idx) => (
+            {foodCategories.map((category, idx) => (
               <div
                 id={`category-${idx}`}
                 key={`category-${idx}`}
-                className="w-[130px] h-[130px] bg-white flex flex-col items-center justify-center gap-3 p-4 text-[16px] font-semibold text-gray-600 rounded-lg shadow-xl hover:bg-green-200 cursor-pointer transition-all duration-300"
-                onClick={() => categoryFoodFilter(category.name)}
+                className={`w-[130px] h-[130px] flex flex-col items-center justify-center gap-3 p-4 text-[16px] font-semibold rounded-lg shadow-xl  cursor-pointer transition-all duration-300 ${((category.active)? 'bg-green-400 text-white' : 'bg-white text-gray-600 hover:bg-green-200' )}`}
+                onClick={() => categoryFoodFilter(category.name, category.id)}
               >
                 {category.icon}
                 {category.name}
@@ -76,11 +77,12 @@ function Home() {
 
           {/* Mobile view */}
           <div className='flex md:hidden overflow-x-auto gap-3 p-2'>
-            {Categories.map((category, idx) => (
+            {foodCategories.map((category, idx) => (
               <button
                 key={`mobile-${idx}`}
-                onClick={() => categoryFoodFilter(category.name)}
-                className='flex-shrink-0 px-4 py-2 bg-white text-sm font-medium text-gray-700 rounded-full shadow hover:bg-green-200 transition'
+                id={`category-${idx}`}
+                onClick={() => categoryFoodFilter(category.name, category.id)}
+                className={`flex-shrink-0 px-4 py-2 text-sm font-medium rounded-full shadow transition' ${((category.active)? 'bg-green-400 text-slate-200' : 'bg-white text-gray-700 hover:bg-green-200' )}`}
               >
                 {category.name}
               </button>
