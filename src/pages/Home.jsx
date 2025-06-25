@@ -58,9 +58,10 @@ function Home() {
 
       {/* Category */}
       {!input && (
-        <div className="flex flex-wrap justify-center items-center gap-5 w-[100%]">
-          {Categories.map((category, idx) => {
-            return (
+        <div className='w-full'>
+          {/* Desktop view */}
+          <div className='hidden md:flex flex-wrap justify-center items-center gap-5 mt-5'>
+            {Categories.map((category, idx) => (
               <div
                 id={`category-${idx}`}
                 key={`category-${idx}`}
@@ -70,9 +71,23 @@ function Home() {
                 {category.icon}
                 {category.name}
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* Mobile view */}
+          <div className='flex md:hidden overflow-x-auto gap-3 p-2'>
+            {Categories.map((category, idx) => (
+              <button
+                key={`mobile-${idx}`}
+                onClick={() => categoryFoodFilter(category.name)}
+                className='flex-shrink-0 px-4 py-2 bg-white text-sm font-medium text-gray-700 rounded-full shadow hover:bg-green-200 transition'
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
         </div>
+
       )}
 
       {/* Cards of food */}
